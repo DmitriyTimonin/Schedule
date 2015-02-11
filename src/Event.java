@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,5 +11,11 @@ public class Event {
     {
         text = t;
         date = d;
+    }
+
+    public void ShowEvent()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss");
+        System.out.println(formatter.format(date) + " " + text);
     }
 }
