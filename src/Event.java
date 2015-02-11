@@ -18,4 +18,19 @@ public class Event {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss");
         System.out.println(formatter.format(date) + " " + text);
     }
+
+    public String getText()
+    {
+        return text;
+    }
+
+    public Date getDate()
+    {
+        return date;
+    }
+
+    public Event getEvent()
+    {
+        return this;
+    }
 }

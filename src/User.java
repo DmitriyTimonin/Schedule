@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
@@ -23,6 +24,7 @@ public class User {
     {
         return name;
     }
+
     public void setTimeAndStat(TimeZone t, boolean s)
     {
         timezone = t;
@@ -32,6 +34,7 @@ public class User {
     {
         event.add(new Event(t, d));
     }
+
     public void ShowUser()
     {
         String buf = "passive";
@@ -40,5 +43,29 @@ public class User {
         System.out.println(name + " " + timezone.getID() + " " + buf);
         for (int i = 0; i < event.size(); i++)
             event.get(i).ShowEvent();
+    }
+
+    public void RemoveEvent(String text)
+    {
+        for (int i = 0; i < event.size(); i++)
+            if (text.equals(event.get(i).getText()))
+            {
+                event.remove(i);
+                break;
+            }
+    }
+
+    public Event getEvent(String text)
+    {
+        String st = "Not found";
+        Date dt;// = new Date(115, 0, 1, 17, 35, 23);
+        int ind = 0;
+        for (int i = 0; i < event.size(); i++)
+            if (text.equals(event.get(i).getText()))
+            {
+                ind = i;
+                break;
+            }
+            return event.get(ind).getEvent();
     }
 }

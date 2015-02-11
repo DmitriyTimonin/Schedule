@@ -18,7 +18,7 @@ public class Schedule {
                 String command = s.substring(0, ind);
                 System.out.println(s);
                 System.out.println(command);
-                String name, timezone, status, text, datetime;
+                String name, timezone, status, text, datetime, nameTo;
                 boolean stat;
                 switch (command) {
                     case "Create":
@@ -92,6 +92,50 @@ public class Schedule {
                                 users.get(i).ShowUser();
                                 break;
                             }
+                        break;
+
+                    case "RemoveEvent":
+                        s = s.substring(ind + 1);
+                        ind = s.indexOf(',');
+                        name = s.substring(0, ind);
+                        s = s.substring(ind + 2);
+                        text = s.substring(0, s.length() - 1);
+                        for (int i = 0; i < users.size(); i++)
+                            if (name.equals(users.get(i).getName())) {
+                                users.get(i).RemoveEvent(text);
+                                break;
+                            }
+                        break;
+
+                    case "CloneEvent":
+                        s = s.substring(ind + 1);
+                        ind = s.indexOf(',');
+                        name = s.substring(0, ind);
+                        s = s.substring(ind + 2);
+                        ind = s.indexOf(',');
+                        text = s.substring(0, ind);
+                        s = s.substring(ind + 2);
+                        ind = s.indexOf(')');
+                        nameTo = s.substring(0, ind);
+                        int fromUser = 0, toUser = 0;
+                        int count = 0;
+                        for (int i = 0; i < users.size(); i++)
+                        {
+                            if (name.equals(users.get(i).getName())) {
+                                fromUser = i;
+                                count++;
+                                if (count == 2)
+                                    break;
+                            }
+                            if (nameTo.equals(users.get(i).getName())) {
+                                toUser = i;
+                                count++;
+                                if (count == 2)
+                                    break;
+                            }
+                        }
+                        Event temp = users.get(fromUser).getEvent(text);
+                        users.get(toUser).AddEvent(temp.getText(), temp.getDate());
                         break;
                 }
             }
