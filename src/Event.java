@@ -1,22 +1,37 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by ImmortalWolf on 10.02.2015.
  */
-public class Event {
+public class Event extends TimerTask {
     private Date date;
     private String text;
-    public Event (String t, Date d)
+    private Timer timer;
+    private User user;
+    public static boolean show = false;
+
+    public Event (String t, Date d, User u)
     {
         text = t;
         date = d;
+        user = u;
+        timer = new Timer();
+        timer.schedule(this, date);
     }
 
-    public void ShowEvent()
+    public void run()
     {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss");
-        System.out.println(formatter.format(date) + " " + text);
+        if (user.getStatus() && show)
+        {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss");
+            formatter.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+            System.out.println(formatter.format(date) + " " + text);
+        }
+        Thread.currentThread().stop();
     }
 
     public String getText()
@@ -32,5 +47,10 @@ public class Event {
     public Event getEvent()
     {
         return this;
+    }
+
+    public void deleteTimer()
+    {
+        timer.cancel();
     }
 }
