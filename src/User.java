@@ -52,7 +52,7 @@ public class User {
             buf = "active";
         System.out.println(name + " " + timezone.getID() + " " + buf);
         for (int i = 0; i < event.size(); i++)
-            event.get(i).run();
+            event.get(i).ShowEvent();
     }
 
     public void RemoveEvent(String text)

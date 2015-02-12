@@ -29,9 +29,16 @@ public class Event extends TimerTask {
         {
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss");
             formatter.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-            System.out.println(formatter.format(date) + " " + text);
+            System.out.println(formatter.format(date) + " " + user.getName() + " " + text);
         }
         Thread.currentThread().stop();
+    }
+
+    public void ShowEvent()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy-HH:mm:ss");
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        System.out.println(formatter.format(date) + " " + text);
     }
 
     public String getText()
